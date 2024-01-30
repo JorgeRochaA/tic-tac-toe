@@ -1,18 +1,15 @@
 import React, { useEffect } from "react";
+
+//redux
 import { useSelector, useDispatch } from "react-redux";
+import { setCurrentPlayerTurn, setCurrentGame } from "../redux/gameSlice";
 
 //styles
 import { GameBoardContainer, GameBoardOption } from "../styles/GameBoard";
 import { GameH1 } from "../styles/GameH1";
 
-//redux
-
-import {
-  setCurrentPlayerTurn,
-  setCurrentGame,
-  restartGame,
-} from "../redux/gameSlice";
-import { Button } from "../styles/Button";
+//components
+import GameStatusModal from "./GameStatusModal";
 
 export default function GameBoard() {
   const dispatch = useDispatch();
@@ -83,14 +80,15 @@ export default function GameBoard() {
       )}
       {checkWinner(currentGame) && (
         <>
-          <GameH1>
-            {checkWinner(currentGame) === "Draw"
-              ? "It's a draw"
-              : checkWinner(currentGame) === "X"
-              ? "You win"
-              : "IA wins"}
-          </GameH1>
-          <Button onClick={() => dispatch(restartGame())}>restart</Button>
+          <GameStatusModal
+            gameStatus={
+              checkWinner(currentGame) === "Draw"
+                ? "It's a draw"
+                : checkWinner(currentGame) === currentPlayer
+                ? "You win"
+                : "IA wins"
+            }
+          />
         </>
       )}
 

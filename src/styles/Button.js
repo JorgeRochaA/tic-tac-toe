@@ -9,8 +9,6 @@ export const Button = styled.button`
   border-radius: 80px;
   border: 1px solid #ececec;
   background: #fff;
-  box-shadow: 0px 1px 3px 1px rgba(115, 92, 0, 0.2),
-    0px 1px 2px 0px rgba(115, 92, 0, 0.3);
   transition: 0.5s;
   img {
     width: 32px;
@@ -32,4 +30,10 @@ export const Button = styled.button`
   line-height: 120%; /* 19.2px */
   letter-spacing: 1.6px;
   text-transform: uppercase;
+
+  &.blue {
+    border-radius: 56px;
+    background: #005bc0;
+    color: #fff;
+  }
 `;
