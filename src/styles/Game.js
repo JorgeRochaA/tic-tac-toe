@@ -40,4 +40,9 @@ export const UserOptionsContainer = styled.div`
   display: flex;
   gap: 16px;
   margin-top: 24px;
+  margin-bottom: 58px;
+
+  @media (max-width: 515px) {
+    flex-direction: column;
+  }
 `;
