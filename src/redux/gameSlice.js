@@ -75,6 +75,14 @@ export const gameSlice = createSlice({
     setCurrentPlayerTurn: (state, action) => {
       state.currentPlayerTurn = action.payload;
     },
+    restartGame: (state) => {
+      state.currentStep = 1;
+      state.currentDifficulty = "";
+      state.currentPlayer = "";
+      state.whoStartTheGame = "";
+      state.currentPlayerTurn = "";
+      state.currentGame = ["", "", "", "", "", "", "", "", ""];
+    },
   },
   extraReducers: (builder) => {},
 });
@@ -86,6 +94,7 @@ export const {
   setWhoStartTheGame,
   setCurrentGame,
   setCurrentPlayerTurn,
+  restartGame,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

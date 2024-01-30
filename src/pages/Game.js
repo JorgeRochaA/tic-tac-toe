@@ -32,8 +32,6 @@ export default function Game() {
 
   const currentStep = useSelector((state) => state.game.currentStep);
 
-  const storeData = useSelector((state) => state.game);
-
   function startGame() {
     dispatch(setCurrentStep(2));
   }
@@ -97,7 +95,6 @@ export default function Game() {
   return (
     <>
       <GameHeader>Tic Tac Toe</GameHeader>
-      {JSON.stringify(storeData)}
       <GameContainer>
         {currentStep < 5 && <img src={logo2} alt="logo" />}
         {currentStep === 1 && step1}

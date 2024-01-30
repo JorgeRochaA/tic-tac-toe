@@ -7,7 +7,12 @@ import { GameH1 } from "../styles/GameH1";
 
 //redux
 
-import { setCurrentPlayerTurn, setCurrentGame } from "../redux/gameSlice";
+import {
+  setCurrentPlayerTurn,
+  setCurrentGame,
+  restartGame,
+} from "../redux/gameSlice";
+import { Button } from "../styles/Button";
 
 export default function GameBoard() {
   const dispatch = useDispatch();
@@ -30,12 +35,13 @@ export default function GameBoard() {
         newGameOptions[emptyCells[randomIndex]] =
           currentPlayerTurn === "X" ? "O" : "X";
         fillBoardWithOption(emptyCells[randomIndex]);
-      }, 1000);
+      }, 200);
     }
   }, [currentPlayerTurn]);
 
   function fillBoardWithOption(index) {
     if (currentGame[index] !== "" || checkWinner(currentGame)) return;
+
     const newGameOptions = currentGame.map((option, i) =>
       i === index ? currentPlayerTurn : option
     );
@@ -70,19 +76,22 @@ export default function GameBoard() {
 
   return (
     <>
-      {currentGame.some((cell) => cell === "") && (
+      {currentGame.some((cell) => cell === "") && !checkWinner(currentGame) && (
         <GameH1>
           {currentPlayerTurn === currentPlayer ? "Your Turn" : "IA turn"}
         </GameH1>
       )}
       {checkWinner(currentGame) && (
-        <GameH1>
-          {checkWinner(currentGame) === "Draw"
-            ? "It's a draw"
-            : checkWinner(currentGame) === "X"
-            ? "You win"
-            : "IA wins"}
-        </GameH1>
+        <>
+          <GameH1>
+            {checkWinner(currentGame) === "Draw"
+              ? "It's a draw"
+              : checkWinner(currentGame) === "X"
+              ? "You win"
+              : "IA wins"}
+          </GameH1>
+          <Button onClick={() => dispatch(restartGame())}>restart</Button>
+        </>
       )}
 
       <GameBoardContainer>
@@ -97,7 +106,10 @@ export default function GameBoard() {
           ) : (
             <GameBoardOption
               key={index}
-              onClick={() => fillBoardWithOption(index)}
+              onClick={() => {
+                if (currentPlayerTurn !== currentPlayer) return;
+                fillBoardWithOption(index);
+              }}
             ></GameBoardOption>
           )
         )}
