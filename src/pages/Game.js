@@ -62,8 +62,8 @@ export default function Game() {
       <GameH1>Select the difficulty</GameH1>
       <UserOptionsContainer>
         <Button onClick={() => storeDifficulty("easy")}>Easy</Button>
-        <Button onClick={() => storeDifficulty("medium")}>Medium</Button>
-        <Button onClick={() => storeDifficulty("hard")}>Hard</Button>
+        {/* <Button onClick={() => storeDifficulty("medium")}>Medium</Button>
+        <Button onClick={() => storeDifficulty("hard")}>Hard</Button> */}
       </UserOptionsContainer>
     </>
   );
